@@ -30,7 +30,7 @@ import "../components"
 
 PlasmaCore.ColorScope {
 
-    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+    colorGroup: PlasmaCore.Theme.NormalColorGroup
 
     Connections {
         target: authenticator
@@ -240,9 +240,12 @@ PlasmaCore.ColorScope {
                     root.notification = ""
                     authenticator.tryUnlock(password)
                 }
-
+                
+                
                 actionItems: [
+                                   
                     ActionButton {
+                        y: 48 // some distance to the password field
                         text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Switch User")
                         iconSource: "/usr/share/sddm/themes/earth-night/components/artwork/gnome-session-switch.png"
                         onClicked: mainStack.push(switchSessionPage)
@@ -250,15 +253,21 @@ PlasmaCore.ColorScope {
                         visible: (sessionsModel.count > 0 || sessionsModel.canStartNewSession) && sessionsModel.canSwitchUser
                     }
                 ]
-
-                Loader {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: item ? item.implicitHeight : 0
+                
+                Item { // spacer
+            // text: ("\n")
+            width: units.largeSpacing
+            height: 44
+        }
+                
+            Loader {
+                    // Layout.fillWidth: true
+                    Layout.preferredWidth: 380
+                    // Layout.preferredHeight: 64
                     active: config.showMediaControls
                     source: "MediaControls.qml"
                 }
             }
-
             Component.onCompleted: {
                 if (defaultToSwitchUser) { //context property
                     mainStack.push({
@@ -417,6 +426,7 @@ PlasmaCore.ColorScope {
                     text: userListCurrentModelData.vtNumber === -1 ? i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Start New Session") : i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Switch Session")
                     onClicked: initSwitchSession()
                 }
+                
 
                 actionItems: [
                     ActionButton {
@@ -437,7 +447,7 @@ PlasmaCore.ColorScope {
                 bottomMargin: units.largeSpacing
             }
         }
-
+        
         RowLayout {
             id: header
             anchors {
@@ -447,385 +457,66 @@ PlasmaCore.ColorScope {
                 margins: units.smallSpacing
             }
 
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "  14 ")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "/usr/share/icons/KFaenza/apps/scalable/gmailwatcher.svg"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
+           
+          Image {
+        id: gmail
+        source: "/usr/share/icons/KFaenza/apps/scalable/gmailwatcher.svg"
+        smooth: true
+        sourceSize.width: 40
+        sourceSize.height: 40
+        }
+        
+        Text {
+              text: "24"
+              font.family: "Roboto"
+              font.pointSize: 22
+            color: "white"
+        }
+        
+        
+        Item { // spacer
+            // text: ("\n")
+            width: 30
+            height: 16
+        }
+        
+        
+        Image {
+        id: msgr
+        source: "/usr/share/icons/msgnr.png"
+        smooth: true
+        sourceSize.width: 40
+        sourceSize.height: 40
+        }
+        
+        Text {
+              text: "8"
+              font.family: "Roboto"
+              font.pointSize: 22
+            color: "white"
+        }
+           
+            Item { // spacer
+            // text: ("\n")
+            width: 1400
+            height: 16
+        }
             
+            Image {
+        id: weather1
+        source: "/usr/share/icons/FaenzaFlattr-DarkDecoration/status/scalable/weather-few-clouds.svg"
+        smooth: true
+        sourceSize.width: 48
+        sourceSize.height: 48
+        }
+        
+        Text {
+              text: "Partly Cloudy  -  91° "
+              font.family: "Roboto"
+              font.pointSize: 22
+            color: "white"
+        }
             
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "  7 ")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/msgnr.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-              
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-             PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            
-             PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            
-             PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            
-             PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            
-             PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            
-             PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            
-             PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-             PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-             PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-             PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-            
-            PlasmaComponents.ToolButton {
-                font.pointSize: 18
-                // text: ("","  ","   ")
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", "")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                iconSource: "file:///usr/share/icons/blank.png"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }
-                               
-            PlasmaComponents.ToolButton {
-                // top: (parent.top)
-                // left: (parent.left +1000)
-                // right: (parent.right+1400)
-                // anchors.horizontalRight: parent.horizontalRight
-                // horizontalAlignment: Qt.AlignHRight
-                text: ("plasma_lookandfeel_org.kde.lookandfeel", "", " Partly Cloudy  ~  78° ")
-                font.pointSize: 18
-                iconSource: ("/usr/share/icons/FaenzaFlattr-DarkDecoration/status/scalable/weather-few-clouds.svg")
-                // iconName: inputPanel.keyboardActive ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                //onClicked: inputPanel.showHide()
-
-                visible: true
-            }  
-            
-
             KeyboardLayoutButton {
             }
 
