@@ -1,0 +1,15 @@
+[SddmGreeterTheme]
+Name=DigiTech for Plasma
+Description=DigiTech SDDM Login Theme for Plasma
+Author=Hammer
+License=GPL-3.0-or-later
+Type=sddm-theme
+Version=2.2
+Website=
+Screenshot=Preview.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Email=
+Theme-Id=DigiTech
+Theme-API=2.0
