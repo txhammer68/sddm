@@ -2,7 +2,7 @@
 
 # DisiTech login theme for KDE Plasma
 
-DigiTech is reduces all the clutter and leaves you with a clean, easy to use, login interface with a modern yet classy touch.
+DigiTech reduces all the clutter and leaves you with a clean, easy to use, login interface with a modern yet classy touch.
 
 ### Prerequisites
 
