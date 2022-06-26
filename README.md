@@ -1,5 +1,5 @@
 # SDDM login manager themes 
-![Image of Lockscreen](preview.png)
+![Image of Lockscreen](sddm.png)
 
 Config for xorg to get SDDM proper focus for password field
 # location /etc/X11/xorg.conf.d/10-monitor.conf
